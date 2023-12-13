@@ -16,5 +16,5 @@ const apiRouter = require('./api/routes/apiRouter')
 
 app.use('/api', apiRouter)
 
-let port = process.env.PORT || 5432
+const port = process.env.PORT || 5432
 app.listen(port)
