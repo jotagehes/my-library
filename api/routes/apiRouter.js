@@ -32,7 +32,7 @@ const checkToken = (req, res, next) => {
 const isAdmin = (req, res, next) => {
   knex
     .select('*')
-    .from('usuario')
+    .from('users')
     .where({ id: req.usuarioId })
     .then((usuarios) => {
       if (usuarios.length) {
