@@ -57,7 +57,7 @@ apiRouter.post(`${endpoint}seguranca/register`, (req, res) => {
   knex('users')
     .insert(
       {
-        nome: req.body.nome,
+        name: req.body.nome,
         senha: bcrypt.hashSync(req.body.senha, 8),
         email: req.body.email,
       },
