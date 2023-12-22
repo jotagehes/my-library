@@ -77,7 +77,7 @@ apiRouter.post(`${endpoint}seguranca/register`, (req, res) => {
 apiRouter.post(`${endpoint}seguranca/login`, (req, res) => {
   knex
     .select('*')
-    .from('usuario')
+    .from('users')
     .where({ email: req.body.email })
     .then((usuarios) => {
       if (usuarios.length) {
