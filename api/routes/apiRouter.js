@@ -58,7 +58,7 @@ apiRouter.post(`${endpoint}seguranca/register`, (req, res) => {
     .insert(
       {
         name: req.body.nome,
-        senha: bcrypt.hashSync(req.body.senha, 8),
+        password: bcrypt.hashSync(req.body.senha, 8),
         email: req.body.email,
       },
       ['id']
