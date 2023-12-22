@@ -82,7 +82,7 @@ apiRouter.post(`${endpoint}seguranca/login`, (req, res) => {
     .then((usuarios) => {
       if (usuarios.length) {
         const usuario = usuarios[0]
-        const checkSenha = bcrypt.compareSync(req.body.senha, usuario.senha)
+        const checkSenha = bcrypt.compareSync(req.body.senha, usuario.password)
         if (checkSenha) {
           const tokenJWT = jwt.sign(
             { id: usuario.id },
