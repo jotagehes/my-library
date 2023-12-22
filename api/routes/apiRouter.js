@@ -12,10 +12,12 @@ const endpoint = '/'
 
 const checkToken = (req, res, next) => {
   const authToken = req.headers.authorization
+
   if (!authToken) {
     res.status(401).json({ message: 'Token não informado' })
     return
   }
+
   const token = authToken.split(' ')[1]
   req.token = token
 
@@ -24,7 +26,8 @@ const checkToken = (req, res, next) => {
       res.status(401).json({ message: 'Token inválido' })
       return
     }
-    req.decoded = decoded
+    req.usuarioId = decoded.id
+
     next()
   })
 }
@@ -38,7 +41,7 @@ const isAdmin = (req, res, next) => {
       if (usuarios.length) {
         const usuario = usuarios[0]
         const roles = usuario.role.split(';')
-        const adminRole = roles.includes('ADMIN')
+        const adminRole = roles.includes('admin')
         if (adminRole) {
           next()
         } else {
