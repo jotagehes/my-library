@@ -15,6 +15,11 @@ app.use('/app', express.static(path.join(__dirname, 'public')))
 
 const apiRouter = require('./api/routes/apiRouter')
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
+})
+
 app.use('/api', apiRouter)
 
 const port = process.env.PORT || 5432
