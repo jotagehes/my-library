@@ -31,19 +31,21 @@ const checkToken = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   knex
-    .select('*')
+    .select('role')
     .from('users')
     .where({ id: req.usuarioId })
     .then((usuarios) => {
       if (usuarios.length) {
         const usuario = usuarios[0]
-        const roles = usuario.roles.split(';')
-        const adminRole = roles.find((i) => i === 'ADMIN')
-        if (adminRole === 'ADMIN') {
+        const roles = usuario.role.split(';')
+        const adminRole = roles.includes('ADMIN')
+        if (adminRole) {
           next()
         } else {
           res.status(403).json({ message: 'Role de ADMIN requerida' })
         }
+      } else {
+        res.status(404).json({ message: 'Usuário não encontrado' })
       }
     })
     .catch((err) => {
